@@ -223,7 +223,7 @@ namespace Zenova {
 			bool successful = false;
 
 			if(Platform::Type == PlatformType::Windows) {
-				Platform::DebugPause();
+				//Platform::DebugPause();
 
 				u8* u8Function = reinterpret_cast<u8*>(function) + 3;
 
