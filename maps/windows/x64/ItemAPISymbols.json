@@ -107,15 +107,15 @@
   ],
 
   "includes": [
-    "#include \"Zenova/Minecraft/Util/SharedPtr.h\"",
+    "#include \"Zenova/Minecraft/Header/Util/SharedPtr.h\"",
     "#include \"Zenova/Minecraft/Header/Item/TItemRegistry.h\"",
     "#include \"Zenova/Minecraft/Header/Item/Item_1_14.h\""
   ],
 
   "variables": {
     "bool* Item_1_14::mInCreativeGroup": "0x30507BA",
-    "std::vector<SharedPtr<Item_1_14>>* TItemRegistry::mItemRegistry": "0x3060118",
-    "short* TItemRegistry::mMaxItemID": "0x30507BC"
+    "std::vector<SharedPtr<Item_1_14>>* TItemRegistry<Item_1_14>::mItemRegistry": "0x3060118",
+    "short* TItemRegistry<Item_1_14>::mMaxItemID": "0x30507BC"
   },
 
   "functions": [
@@ -132,19 +132,19 @@
       "address": "0x1560BD0"
     },
     {
-      "name": "?registerItem@TItemRegistry@@SAXV?$SharedPtr@VItem_1_14@@@@@Z",
+      "name": "?registerItem@?$TItemRegistry@VItem_1_14@@$0A@@@SAXV?$SharedPtr@VItem_1_14@@@@@Z",
       "address": "0x15692F0"
     },
     {
-      "name": "?getItem@TItemRegistry@@SA?AV?$WeakPtr@VItem@@@@F@Z",
+      "name": "?getItem@TItemRegistry@Item_1_14@@@@SA?AV?$WeakPtr@VItem@@@@F@Z",
       "address": "0x1569180"
     },
     {
-      "name": "?lookupByName@TItemRegistry@@SA?AV?$WeakPtr@VItem_1_14@@@@AEAH0AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+      "name": "?lookupByName@TItemRegistry@Item_1_14@@@@SA?AV?$WeakPtr@VItem_1_14@@@@AEAH0AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
       "address": "0x156B410"
     },
     {
-      "name": "?lookupByName@TItemRegistry@@SA?AV?$WeakPtr@VItem_1_14@@@@AEAHAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+      "name": "?lookupByName@TItemRegistry@Item_1_14@@@@SA?AV?$WeakPtr@VItem_1_14@@@@AEAHAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
       "address": "0x156AA50"
     }
   ]

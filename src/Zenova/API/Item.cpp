@@ -8,16 +8,13 @@
 
 namespace Zenova {
 
-	Item::Item(const std::string& descriptionId, const bool addToCreativeInventory, const short id) {
+	Item::Item(const std::string& descriptionId, const short id) {
 		if (Minecraft::version() == Minecraft::v1_14_60_5) {
-			mItem = TItemRegistry::registerItem<Item_1_14>(descriptionId, id);
+			mItem = TItemRegistry<Item_1_14>::registerItem<Item_1_14>(descriptionId, id);
 		}
 		else {
 			unsupportedVersion();
 		}
-
-		if (addToCreativeInventory)
-			addCreativeItem(*this);
 	}
 
 	Item& Item::setTexture(const std::string& textureName, const int textureIndex) {
@@ -40,7 +37,17 @@ namespace Zenova {
 		return *this;
 	}
 
-	Item& Item::setMaxStackSize(const byte maxStackSize) {
+	Item& Item::addCreativeItem(const short dataIndex) {
+		if (Minecraft::version() == Minecraft::v1_14_60_5) {
+			Item_1_14::addCreativeItem(&getItem<Item_1_14>(), dataIndex);
+		}
+		else {
+			unsupportedVersion();
+		}
+		return *this;
+	}
+
+	Item& Item::setMaxStackSize(const u8 maxStackSize) {
 		if (Minecraft::version() == Minecraft::v1_14_60_5) {
 			getItem<Item_1_14>().setMaxStackSize(maxStackSize);
 		}
@@ -114,18 +121,9 @@ namespace Zenova {
 		return mItem.get();
 	}
 
-	void Item::addCreativeItem(Item &item, const short dataIndex) {
-		if (Minecraft::version() == Minecraft::v1_14_60_5) {
-			Item_1_14::addCreativeItem(&item.getItem<Item_1_14>(), dataIndex);
-		}
-		else {
-			unsupportedVersion();
-		}
-	}
-
 	short Item::getMaxItemId() {
 		if (Minecraft::version() == Minecraft::v1_14_60_5) {
-			return TItemRegistry::getMaxItemID();
+			return TItemRegistry<Item_1_14>::getMaxItemID();
 		}
 		
 		unsupportedVersion();

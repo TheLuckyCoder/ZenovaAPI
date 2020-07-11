@@ -3,38 +3,38 @@
 #include <vector>
 #include <string>
 
-#include "Zenova/Common.h"
-#include "../../Util/SharedPtr.h"
-#include "Item_1_14.h"
+#include "../Util/SharedPtr.h"
+#include "Zenova/Minecraft/Bedrock/IItem.h"
 
-class EXPORT TItemRegistry {
+template <class Item, typename std::enable_if<std::is_base_of<Bedrock::IItem, Item>::value>::type* = nullptr>
+class TItemRegistry {
 public:
 	template<typename T, typename... Args>
 	static WeakPtr<T> registerItem(const std::string& name, const short id, Args&&... args) {
-		return TItemRegistry::template registerItemShared<T>(name, id + 256, std::forward<Args>(args)...);
+		return TItemRegistry<Item>::template registerItemShared<T>(name, id + 256, std::forward<Args>(args)...);
 	}
 
 	template<typename T, typename... Args>
 	static WeakPtr<T> registerItemShared(Args&&... args) {
 		SharedPtr<T> itemReg = SharedPtr<T>::make(std::forward<Args>(args)...);
-		TItemRegistry::registerItem(itemReg);
+		TItemRegistry<Item>::registerItem(itemReg);
 		return itemReg;
 	}
 
-	static void registerItem(SharedPtr<Item_1_14>);
+	static void registerItem(SharedPtr<Item>);
 	static void shutdown();
 
-	static WeakPtr<Item_1_14> lookupByName(int&, int&, const std::string&);
-	static WeakPtr<Item_1_14> lookupByName(int&, const std::string&);
-	static WeakPtr<Item_1_14> lookupByName(const std::string& inString) {
+	static WeakPtr<Item> lookupByName(int&, int&, const std::string&);
+	static WeakPtr<Item> lookupByName(int&, const std::string&);
+	static WeakPtr<Item> lookupByName(const std::string& inString) {
 		int itemAux;
 		return lookupByName(itemAux, inString);
 	}
-	static WeakPtr<Item_1_14> getItem(short);
+	static WeakPtr<Item> getItem(short);
 	static short getMaxItemID() {
 		return *TItemRegistry::mMaxItemID;
 	}
 
 	static short* mMaxItemID;
-	static std::vector<SharedPtr<Item_1_14>>* mItemRegistry;
+	static std::vector<SharedPtr<Item>>* mItemRegistry;
 };

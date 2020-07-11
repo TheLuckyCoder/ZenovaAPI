@@ -4,6 +4,7 @@
 
 #include "Zenova/Minecraft/Bedrock/IItem.h"
 
+#include "../Client/TextureUVCoordinateSet.h"
 #include "CooldownType.h"
 #include "CreativeItemCategory.h"
 #include "UseAnimation.h"
@@ -26,7 +27,6 @@ class IDataInput;
 class ReadOnlyBinaryStream;
 class IDataOutput;
 class ItemDescriptor;
-class TextureUVCoordinateSet;
 enum class BlockShape;
 enum class InHandUpdateType;
 enum class ItemUseMethod;
@@ -58,6 +58,10 @@ public:
         int getEnchantmentValue() const { return mEnchantmentValue; }
     };
 
+private:
+    char filler[438];
+	
+public:
     static bool* mInCreativeGroup;
 
     Item_1_14(const std::string&, short);
