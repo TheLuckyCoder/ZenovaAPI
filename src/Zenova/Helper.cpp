@@ -20,6 +20,7 @@
 
 #include "Hooks/InputHooks.h"
 #include "Hooks/ResourceHooks.h"
+#include "Hooks/ItemHooks.h"
 
 #include "generated/initcpp.h"
 
@@ -56,6 +57,7 @@ namespace Zenova {
 
 			createResourceHooks();
 			createInputHooks();
+			createItemHooks();
 
 			manager.load(manager.getLaunchedProfile());
 

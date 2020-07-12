@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <string>
 
 #include "../Util/SharedPtr.h"
@@ -22,7 +21,6 @@ public:
 	}
 
 	static void registerItem(SharedPtr<Item>);
-	static void shutdown();
 
 	static WeakPtr<Item> lookupByName(int&, int&, const std::string&);
 	static WeakPtr<Item> lookupByName(int&, const std::string&);
@@ -36,5 +34,4 @@ public:
 	}
 
 	static short* mMaxItemID;
-	static std::vector<SharedPtr<Item>>* mItemRegistry;
 };

@@ -39,7 +39,7 @@ class BlockLegacy;
 typedef unsigned char byte;
 typedef unsigned char FacingID;
 
-class Item_1_14 : public Bedrock::IItem {
+class Item_1_16_1 : public Bedrock::IItem {
 public:
     class Tier {
         const int mLevel;
@@ -59,28 +59,29 @@ public:
     };
 
 private:
-    char filler[438];
+    char filler[432];
 	
 public:
-    static bool* mInCreativeGroup;
+    Item_1_16_1(const std::string&, short);
 
-    Item_1_14(const std::string&, short);
-    virtual ~Item_1_14();
+	virtual ~Item_1_16_1();
     virtual void tearDown();
     virtual int getMaxUseDuration(const ItemInstance*) const;
     virtual int getMaxUseDuration(const ItemStack*) const;
     virtual bool isExperimental(const ItemDescriptor*) const;
-    virtual Item_1_14& setMaxStackSize(byte);
-    virtual Item_1_14& setCategory(CreativeItemCategory);
-    virtual Item_1_14& setStackedByData(bool);
-    virtual Item_1_14& setMaxDamage(int);
-    virtual Item_1_14& setHandEquipped();
-    virtual Item_1_14& setUseAnimation(UseAnimation);
-    virtual Item_1_14& setMaxUseDuration(int);
-    virtual Item_1_14& setRequiresWorldBuilder(bool);
-    virtual Item_1_14& setExplodable(bool);
-    virtual Item_1_14& setIsGlint(bool);
-    virtual Item_1_14& setShouldDespawn(bool);
+	virtual bool isMusicDisk() const;
+    virtual Item_1_16_1& setMaxStackSize(byte);
+    virtual Item_1_16_1& setCategory(CreativeItemCategory);
+    virtual Item_1_16_1& setStackedByData(bool);
+    virtual Item_1_16_1& setMaxDamage(int);
+    virtual Item_1_16_1& setHandEquipped();
+    virtual Item_1_16_1& setUseAnimation(UseAnimation);
+    virtual Item_1_16_1& setMaxUseDuration(int);
+    virtual Item_1_16_1& setRequiresWorldBuilder(bool);
+    virtual Item_1_16_1& setExplodable(bool);
+    virtual Item_1_16_1& setFireResistant(bool);
+    virtual Item_1_16_1& setIsGlint(bool);
+    virtual Item_1_16_1& setShouldDespawn(bool);
     virtual BlockShape getBlockShape() const;
     virtual bool canBeDepleted() const;
     virtual bool canDestroySpecial(const Block&) const;
@@ -101,7 +102,7 @@ public:
     virtual bool isDestructive(int) const;
     virtual bool isLiquidClipItem(int) const;
     virtual bool requiresInteract() const;
-    virtual void appendFormattedHovertext(const ItemStackBase&, Level&, std::string&, const bool) const;
+    virtual void appendFormattedHovertext(const ItemStackBase&, Level&, std::string&, bool) const;
     virtual bool isValidRepairItem(const ItemInstance&, const ItemInstance&) const;
     virtual int getEnchantSlot() const;
     virtual int getEnchantValue() const;
@@ -142,17 +143,17 @@ public:
     virtual void fixupOnLoad(ItemStackBase&, Level&) const;
     virtual short getDamageValue(const std::unique_ptr<CompoundTag>&) const;
     virtual void setDamageValue(ItemStackBase&, short) const;
-    virtual InHandUpdateType getInHandUpdateType(const Player&, const ItemInstance&, const ItemInstance&, const bool, const bool) const;
-    virtual InHandUpdateType getInHandUpdateType(const Player&, const ItemStack&, const ItemStack&, const bool, const bool) const;
+    virtual InHandUpdateType getInHandUpdateType(const Player&, const ItemInstance&, const ItemInstance&, bool, bool) const;
+    virtual InHandUpdateType getInHandUpdateType(const Player&, const ItemStack&, const ItemStack&, bool, bool) const;
     virtual bool isSameItem(const ItemStackBase&, const ItemStackBase&) const;
     virtual std::string getInteractText(const Player&) const;
-    virtual int getAnimationFrameFor(Mob*, bool, const ItemStack*, const bool) const;
-    virtual bool isEmissive(int) const;
+    virtual int getAnimationFrameFor(Mob*, bool, const ItemStack*, bool) const;
+    virtual bool getLightEmission(int) const;
     virtual const TextureUVCoordinateSet& getIcon(const ItemStackBase&, int, bool) const;
     virtual int getIconYOffset() const;
-    virtual Item_1_14& setIcon(const std::string&, int);
-    virtual Item_1_14& setIcon(const TextureUVCoordinateSet&);
-    virtual Item_1_14& setIconAtlas(const std::string&, int);
+    virtual Item_1_16_1& setIcon(const std::string&, int);
+    virtual Item_1_16_1& setIcon(const TextureUVCoordinateSet&);
+    virtual Item_1_16_1& setIconAtlas(const std::string&, int);
     virtual bool canBeCharged() const;
     virtual void playSoundIncrementally(const ItemInstance&, Mob&) const;
     virtual void playSoundIncrementally(const ItemStack&, Mob&) const;
@@ -161,12 +162,10 @@ public:
     static const TextureAtlasItem& getTextureItem(const std::string&);
     static const TextureUVCoordinateSet& getIconTextureUVSet(const TextureAtlasItem&, int, int);
 
-    static void beginCreativeGroup(const std::string&, Item_1_14*, short, const CompoundTag*);
-    static void addCreativeItem(Item_1_14*, short);
+    static void beginCreativeGroup(const std::string&, Item_1_16_1*, short, const CompoundTag*);
+    static void addCreativeItem(Item_1_16_1*, short);
     static void addCreativeItem(const Block&);
-    static void endCreativeGroup() {
-        *mInCreativeGroup = false;
-    }
+    static void endCreativeGroup();
 private:
     virtual bool _checkUseOnPermissions(Actor&, ItemInstance&, const FacingID&, const BlockPos&) const;
     virtual bool _checkUseOnPermissions(Actor&, ItemStack&, const FacingID&, const BlockPos&) const;
