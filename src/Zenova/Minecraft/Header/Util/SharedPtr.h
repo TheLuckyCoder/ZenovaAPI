@@ -38,7 +38,7 @@ class SharedPtr {
 public:
     SharedCounter<T>* pc = nullptr;
 
-    SharedPtr() {}
+    SharedPtr() = default;
 
     SharedPtr(std::nullptr_t) {}
 
@@ -102,7 +102,7 @@ class WeakPtr {
 public:
     SharedCounter<T>* pc = nullptr;
 
-    WeakPtr() {}
+    WeakPtr() = default;
 
     WeakPtr(std::nullptr_t) {}
 

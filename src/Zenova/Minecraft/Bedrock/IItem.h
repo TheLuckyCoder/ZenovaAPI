@@ -2,6 +2,7 @@
 
 namespace Bedrock {
 	class IItem {
+	public:
 		IItem() = default;
 		IItem(const IItem&) = default;
 		IItem(IItem&&) = default;

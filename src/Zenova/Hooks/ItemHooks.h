@@ -1,4 +1,4 @@
-#include "Zenova/API/ZenovaItems.h"
+#include "Zenova/API/ItemsDelegate.h"
 
 #include "Zenova.h"
 
@@ -8,7 +8,7 @@ namespace Zenova {
 		_registerVanillaItems(b1);
 
 		Zenova_Info("Initializing Items");
-		ZenovaItems::handleRegisterItemsCallbacks();
+		ItemsDelegate::handleRegisterItems();
 		Zenova_Info("Initializing Items End");
 	}
 
@@ -17,16 +17,16 @@ namespace Zenova {
 		_initVanillaCreativeCategories();
 
 		Zenova_Info("Initializing Creative Categories");
-		ZenovaItems::handleInitCreativeCategoriesCallbacks();
+		ItemsDelegate::handleInitCreativeCategories();
 		Zenova_Info("Initializing Creative Categories End");
 	}
 
-	static void (*_initVanillaCreativeItemsCallback)(class ActorInfoRegistry*, class BlockDefinitionGroup*, bool);
-	inline void initVanillaCreativeItemsCallback(class ActorInfoRegistry* actorInfoRegistry, class BlockDefinitionGroup* blockDefinitionGroup, const bool b1) {
-		_initVanillaCreativeItemsCallback(actorInfoRegistry, blockDefinitionGroup, b1);
+	static void (*_initVanillaCreativeItems)(class ActorInfoRegistry*, class BlockDefinitionGroup*, bool);
+	inline void initVanillaCreativeItems(class ActorInfoRegistry* p1, class BlockDefinitionGroup* p2, const bool p3) {
+		_initVanillaCreativeItems(p1, p2, p3);
 
 		Zenova_Info("Initializing Creative Items");
-		ZenovaItems::handleInitCreativeItemsCallbacks();
+		ItemsDelegate::handleInitCreativeItems();
 		Zenova_Info("Initializing Creative Items End");
 	}
 
@@ -35,14 +35,14 @@ namespace Zenova {
 		_initVanillaClientData();
 
 		Zenova_Info("Initializing Client Data");
-		ZenovaItems::handleInitClientDataCallbacks();
+		ItemsDelegate::handleInitClientData();
 		Zenova_Info("Initializing Client Data End");
 	}
 	
 	inline void createItemHooks() {
-		Zenova::Hook::Create(ZenovaItems::getRegisterItemsFunction(), &registerVanillaItems, &_registerVanillaItems);
-		Zenova::Hook::Create(ZenovaItems::getInitCreativeCategoriesFunction(), &initVanillaCreativeCategories, &_initVanillaCreativeCategories);
-		Zenova::Hook::Create(ZenovaItems::getInitCreativeItemsFunction(), &initVanillaCreativeItemsCallback, &_initVanillaCreativeItemsCallback);
-		Zenova::Hook::Create(ZenovaItems::getInitClientDataFunction(), &initVanillaClientData, &_initVanillaClientData);
+		Zenova::Hook::Create(ItemsDelegate::getRegisterItemsFunction(), &registerVanillaItems, &_registerVanillaItems);
+		Zenova::Hook::Create(ItemsDelegate::getInitCreativeCategoriesFunction(), &initVanillaCreativeCategories, &_initVanillaCreativeCategories);
+		Zenova::Hook::Create(ItemsDelegate::getInitCreativeItemsFunction(), &initVanillaCreativeItems, &_initVanillaCreativeItems);
+		Zenova::Hook::Create(ItemsDelegate::getInitClientDataFunction(), &initVanillaClientData, &_initVanillaClientData);
 	}
 }

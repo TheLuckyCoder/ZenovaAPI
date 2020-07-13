@@ -14,11 +14,11 @@ namespace Zenova {
 	public:
 		Item() = default;
 		
-		explicit Item(const std::string &descriptionId, short id = getMaxItemId());
+		explicit Item(std::string descriptionId, short id = getMaxItemId());
 
-		Item& setTexture(const std::string &textureName, int textureIndex = 0);
+		Item& setTexture(std::string textureName, int textureIndex = 0);
 		Item& setCreativeCategory(CreativeItemCategory category);
-		Item& addCreativeItem(short dataIndex = 0);
+		Item& addCreativeItem();
 		Item& setMaxStackSize(u8 maxStackSize);
 		Item& setMaxItemDamage(int maxItemDamage);
 		Item& setHandEquipped();
@@ -27,7 +27,13 @@ namespace Zenova {
 		Item& setIsGlint(bool glint);
 		Item& setShouldDespawn(bool shouldDespawn);
 
-		Bedrock::IItem* getMinecraftItem() const;
+		const std::string& getDescriptionId() const {
+			return mDescriptionId;
+		}
+
+		WeakPtr<Bedrock::IItem>& getBedrockItem() {
+			return mItem;
+		}
 
 	private:
 		template <class T, typename std::enable_if<std::is_base_of<Bedrock::IItem, T>::value>::type* = nullptr>
@@ -36,8 +42,8 @@ namespace Zenova {
 		}
 
 		static short getMaxItemId();
-		static void unsupportedVersion();
-		
+
+		std::string mDescriptionId;
 		WeakPtr<Bedrock::IItem> mItem;
 	};
 }

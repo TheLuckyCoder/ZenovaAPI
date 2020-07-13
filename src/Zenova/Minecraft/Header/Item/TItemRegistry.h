@@ -10,16 +10,16 @@ class TItemRegistry {
 public:
 	template<typename T, typename... Args>
 	static WeakPtr<T> registerItem(const std::string& name, const short id, Args&&... args) {
-		return TItemRegistry<Item>::template registerItemShared<T>(name, id + 256, std::forward<Args>(args)...);
+		return registerItemShared<T>(name, id + 256, std::forward<Args>(args)...);
 	}
 
 	template<typename T, typename... Args>
 	static WeakPtr<T> registerItemShared(Args&&... args) {
 		SharedPtr<T> itemReg = SharedPtr<T>::make(std::forward<Args>(args)...);
-		TItemRegistry<Item>::registerItem(itemReg);
+		registerItem(itemReg);
 		return itemReg;
 	}
-
+	
 	static void registerItem(SharedPtr<Item>);
 
 	static WeakPtr<Item> lookupByName(int&, int&, const std::string&);
